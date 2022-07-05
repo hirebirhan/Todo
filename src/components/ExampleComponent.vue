@@ -19,18 +19,21 @@ function useDisplayTodo(todos: Ref<Todo[]>) {
 
 export default defineComponent({
   name: 'ExampleComponent',
+  data: function () {
+    return {};
+  },
   props: {
     title: {
-      type: String,
-      required: true,
-    },
-    todo: {
       type: String,
       required: true,
     },
     todos: {
       type: Array as PropType<Todo[]>,
       default: () => [],
+    },
+    newTodo: {
+      type: String,
+      default: '',
     },
     meta: {
       type: Object as PropType<Meta>,
@@ -42,7 +45,6 @@ export default defineComponent({
   },
   methods: {
     addTodo() {
-      console.log(this.todo);
       const item = 12;
       return { item };
     },
@@ -55,12 +57,12 @@ export default defineComponent({
 <template>
   <div>
     <p>{{ title }}</p>
-    <div class="q-section">
-      <!-- <q-input v-model="todo" outlined label="Outlined" /> -->
+    <!-- <div class="q-section">
+    - <q-input v-model="newTodo" outlined label="Outlined" />
     </div>
     <div>
       <q-btn @click="addTodo" label="Submit" type="submit" color="primary" />
-    </div>
+    </div> -->
     <ul v-if="todos?.length > 0">
       <li v-for="todo in todos" :key="todo.id" @click="increment">
         {{ todo.id }} - {{ todo.content }}

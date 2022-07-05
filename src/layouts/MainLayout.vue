@@ -10,14 +10,10 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-
-        <q-toolbar-title> ToDo </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
       <div class="q-px-lg q-pt-xl q-mb-md">
         <div class="text-h3">TODO</div>
-        <div class="text-subtitlel">{{ new Date() }}</div>
+        <div class="text-subtitlel">{{ currentDate }}</div>
         <q-img src="../assets/mountain.jpg" class="header-image absolute-top" />
       </div>
     </q-header>
@@ -28,6 +24,7 @@
 
         <EssentialLink
           v-for="link in essentialLinks"
+          to="/"
           :key="link.title"
           v-bind="link"
         />
@@ -44,6 +41,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
+import { date } from 'quasar';
 
 const linksList = [
   {
@@ -59,6 +57,12 @@ export default defineComponent({
 
   components: {
     EssentialLink,
+  },
+  computed: {
+    currentDate: () => {
+      const timeStamp = Date.now();
+      return date.formatDate(timeStamp, 'dddd MMMM YYYY');
+    },
   },
 
   setup() {
